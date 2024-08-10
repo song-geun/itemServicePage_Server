@@ -1,6 +1,8 @@
 package com.example.demo.Dto;
 
+
 import com.example.demo.Entity.T_product;
+import com.example.demo.Entity.T_product_data;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,11 +13,10 @@ public class ProductDto {
     private final String p_name;
     private final Long value;
     public static ProductDto from(T_product product){
-            return ProductDto.builder()
+        return ProductDto.builder()
                 .p_id(product.getP_id())
                 .p_name(product.getP_name())
                 .value(product.getValue())
                 .build();
     }
-
 }

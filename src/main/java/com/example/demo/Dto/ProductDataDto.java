@@ -1,6 +1,6 @@
 package com.example.demo.Dto;
 
-
+import com.example.demo.Entity.T_product;
 import com.example.demo.Entity.T_product_data;
 import lombok.Builder;
 import lombok.Data;
