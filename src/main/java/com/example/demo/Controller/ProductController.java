@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/Product")
 public class ProductController {
@@ -31,7 +32,6 @@ public class ProductController {
 
     @GetMapping("/list")
     @Transactional(dontRollbackOn = Exception.class)
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<List<ProductDto>> findAll(){
         return ResponseEntity.ok(productService.findAll()
                 .stream()
