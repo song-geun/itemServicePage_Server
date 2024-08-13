@@ -12,11 +12,13 @@ public class ProductDto {
     private final Long p_id;
     private final String p_name;
     private final Long value;
+    private final String quantity;
     public static ProductDto from(T_product product){
         return ProductDto.builder()
                 .p_id(product.getP_id())
                 .p_name(product.getP_name())
                 .value(product.getValue())
+                .quantity(product.getQuantity())
                 .build();
     }
 }

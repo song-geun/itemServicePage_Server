@@ -17,4 +17,6 @@ public class T_product {
     private String p_name;
     @Column
     private Long value;
+    @Column
+    private String quantity = "0";
 }
