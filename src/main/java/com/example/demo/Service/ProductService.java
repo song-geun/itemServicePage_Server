@@ -26,18 +26,18 @@ public class ProductService {
         return products.isEmpty() ? Collections.emptyList() : products;
     }
     @Transactional
-    public List<T_product> insertProduct(Product product)
+    public String insertProduct(String P_name, String Value)
     {
         final List<T_product> products;
-        products = productRepository.USP_ProductMange("I1", product.getP_id(), product.getP_name(), product.getValue());
-        return products.isEmpty() ? Collections.emptyList() : products;
+        products = productRepository.USP_ProductMange("I1", "", P_name, Value);
+        return products.isEmpty() ? "Fail" : "OK";
     }
 
     @Transactional
-    public List<T_product> updateProduct(Product product)
+    public String updateProduct(String P_name, String Value)
     {
         final List<T_product> products;
-        products = productRepository.USP_ProductMange("U1", product.getP_id(), product.getP_name(), product.getValue());
-        return products.isEmpty() ? Collections.emptyList() : products;
+        products = productRepository.USP_ProductMange("U1", "", P_name, Value);
+        return products.isEmpty() ? "Fail" : "OK";
     }
 }
