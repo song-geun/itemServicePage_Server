@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface ProductDataRepository extends JpaRepository<T_product_data,Long> {
     @Procedure("USP_ProductDataManage")
-    @Transactional(rollbackOn = {SQLException.class})
     List<T_product_data> USP_ProductDataMange(@Param("prstype") String prstype,
                                               @Param("Pprod_data_id") String Pprod_data_id,
                                               @Param("Pp_id") String Pp_id,
@@ -21,4 +20,13 @@ public interface ProductDataRepository extends JpaRepository<T_product_data,Long
                                               @Param("Pvalue") String Pvalue,
                                               @Param("Pp_quantity") String Pp_quantity,
                                               @Param("Pp_DATE") String Pp_DATE);
+    @Procedure("USP_ProductDataManage")
+    void USP_ProductDataMange_I(@Param("prstype") String prstype,
+                                              @Param("Pprod_data_id") String Pprod_data_id,
+                                              @Param("Pp_id") String Pp_id,
+                                              @Param("Pp_name") String Pp_name,
+                                              @Param("Pvalue") String Pvalue,
+                                              @Param("Pp_quantity") String Pp_quantity,
+                                              @Param("Pp_DATE") String Pp_DATE);
+
 }

@@ -18,7 +18,7 @@ public class ProductDataService {
 
     public List<T_product_data> findAll(){
         final List<T_product_data> productDataList;
-        productDataList = productDataRepository.USP_ProductDataMange("S1","","","","","","");
+        productDataList = productDataRepository.USP_ProductDataMange("S2","","","","","","");
         return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
     }
 
@@ -29,18 +29,13 @@ public class ProductDataService {
     }
 
     @Transactional
-    public String Insert(String Pp_id, String Pp_name, String Pvalue, String Pp_quantity, String Pp_DATE) {
-        final List<T_product_data> productDataList;
-        productDataList = productDataRepository.USP_ProductDataMange("I1","",Pp_id,Pp_name,Pvalue,Pp_quantity,Pp_DATE);
-        return productDataList.isEmpty() ? "Fail" : "OK";
+    public void Insert(String Pp,String Pp_id, String Pp_name, String Pvalue, String Pp_quantity, String Pp_DATE)
+    {
+        productDataRepository.USP_ProductDataMange_I("I1","",Pp_id,Pp_name,Pvalue,Pp_quantity,Pp_DATE);
     }
 
     @Transactional
-    public String DELETE(String DATE) {
-        if(DATE == "")
-            return "Fail";
-        final List<T_product_data> productDataList;
-        productDataList = productDataRepository.USP_ProductDataMange("D1","","","","","",DATE);
-        return productDataList.isEmpty() ? "Fail" : "OK";
+    public void DELETE(String DATE) {
+        productDataRepository.USP_ProductDataMange_I("D1","","","","","",DATE);
     }
 }

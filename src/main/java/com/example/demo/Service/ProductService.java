@@ -22,22 +22,18 @@ public class ProductService {
 
     public List<T_product> findAll() {
         final List<T_product> products;
-        products = (List<T_product>) productRepository.USP_ProductMange("S1","","","");
+        products = (List<T_product>) productRepository.USP_ProductMange("S1", 0L,"",0L, 0L);
         return products.isEmpty() ? Collections.emptyList() : products;
     }
     @Transactional
-    public String insertProduct(String P_name, String Value)
+    public void insertProduct(Long P_id,String P_name, Long Value, Long P_quantity)
     {
-        final List<T_product> products;
-        products = productRepository.USP_ProductMange("I1", "", P_name, Value);
-        return products.isEmpty() ? "Fail" : "OK";
+        productRepository.USP_ProductMange_I("I1", P_id, P_name, Value, P_quantity);
+    }
+    @Transactional
+    public void updateProduct(Long P_id,String P_name, Long Value, Long P_quantity)
+    {
+        productRepository.USP_ProductMange_I("U1", P_id, P_name, Value, P_quantity);
     }
 
-    @Transactional
-    public String updateProduct(String P_name, String Value)
-    {
-        final List<T_product> products;
-        products = productRepository.USP_ProductMange("U1", "", P_name, Value);
-        return products.isEmpty() ? "Fail" : "OK";
-    }
 }
