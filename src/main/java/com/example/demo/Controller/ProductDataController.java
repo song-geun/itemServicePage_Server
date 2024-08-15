@@ -24,6 +24,7 @@ public class ProductDataController {
     public ProductDataController(ProductDataService productDataService) {this.productDataService = productDataService;}
 
     @GetMapping("/list")
+    @Transactional(rollbackOn = {SQLException.class})
     public ResponseEntity<List<ProductDataDto>> findAll(){
         return ResponseEntity.ok(productDataService.findAll()
                 .stream()
@@ -31,6 +32,7 @@ public class ProductDataController {
                 .collect(Collectors.toList()));
     }
     @GetMapping("/DATElist")
+    @Transactional(rollbackOn = {SQLException.class})
     public ResponseEntity<List<ProductDataDto>> find(@RequestBody String date){
         return ResponseEntity.ok(productDataService.find(date)
                 .stream()
@@ -41,8 +43,14 @@ public class ProductDataController {
     @Transactional(rollbackOn = {SQLException.class})
     public void insertAll(@RequestBody List<T_product_data>  dataAll){
         for(T_product_data product : dataAll){
-            productDataService.Insert(product.getProd_data_id().toString(),product.getP_id().toString(),product.getP_name(),
-                    product.getValue().toString(),product.getP_quantity().toString(),product.getDATE());
+            productDataService.Insert(product.getProd_data_id().toString(),product.getP_id(),product.getP_name(),
+                    product.getValue(),product.getP_quantity(),product.getDATE());
         }
+    }
+    @PostMapping("/insert")
+    @Transactional(rollbackOn = {SQLException.class})
+    public void insertAll(@RequestBody T_product_data  product){
+            productDataService.Insert(product.getProd_data_id().toString(),product.getP_id(),product.getP_name(),
+                    product.getValue(),product.getP_quantity(),product.getDATE());
     }
 }

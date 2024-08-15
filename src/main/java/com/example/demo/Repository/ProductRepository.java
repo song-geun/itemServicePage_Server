@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<T_product, Long> {
     @Procedure("USP_ProductManage")
+    @Transactional(rollbackOn = {SQLException.class})
     List<T_product> USP_ProductMange(@Param("prstype") String prstype,
                                      @Param("Pp_id") Long Pp_id,
                                      @Param("Pp_name") String Pp_name,
@@ -21,6 +22,7 @@ public interface ProductRepository extends JpaRepository<T_product, Long> {
                                      @Param("P_quantity") Long P_quantity);
 
     @Procedure("USP_ProductManage")
+    @Transactional(rollbackOn = {SQLException.class})
     void USP_ProductMange_I(@Param("prstype") String prstype,
                                      @Param("Pp_id") Long Pp_id,
                                      @Param("Pp_name") String Pp_name,

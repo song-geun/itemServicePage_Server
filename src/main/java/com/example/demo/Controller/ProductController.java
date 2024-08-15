@@ -28,6 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("/list")
+    @Transactional(rollbackOn = {SQLException.class})
     public ResponseEntity<List<ProductDto>> findAll(){
         return ResponseEntity.ok(productService.findAll()
                 .stream()
@@ -40,5 +41,11 @@ public class ProductController {
         for(T_product product : dataAll){
             productService.insertProduct(product.getP_id() ,product.getP_name().toString(),product.getValue(), product.getQuantity());
         }
+    }
+
+    @PostMapping("/insert")
+    @Transactional(rollbackOn = {SQLException.class})
+    public void insertAll(@RequestBody T_product  product){
+            productService.insertProduct(product.getP_id() ,product.getP_name().toString(),product.getValue(), product.getQuantity());
     }
 }

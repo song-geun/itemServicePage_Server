@@ -14,28 +14,28 @@ public class ProductDataService {
     private ProductDataRepository productDataRepository;
 
     @Autowired
-    public ProductDataService(ProductDataRepository productDataRepository) {productDataRepository = productDataRepository;}
+    public ProductDataService(ProductDataRepository productDataRepository) {this.productDataRepository = productDataRepository;}
 
     public List<T_product_data> findAll(){
         final List<T_product_data> productDataList;
-        productDataList = productDataRepository.USP_ProductDataMange("S2","","","","","","");
+        productDataList = productDataRepository.USP_ProductDataMange("S1",0L, 0L,"",0L,0L,"");
         return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
     }
 
     public List<T_product_data> find(String DATE){
         final List<T_product_data> productDataList;
-        productDataList = productDataRepository.USP_ProductDataMange("S2","","","","","",DATE);
+        productDataList = productDataRepository.USP_ProductDataMange("S2",0L,0L,"",0L,0L,DATE);
         return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
     }
 
     @Transactional
-    public void Insert(String Pp,String Pp_id, String Pp_name, String Pvalue, String Pp_quantity, String Pp_DATE)
+    public void Insert(String Pp,Long Pp_id, String Pp_name, Long Pvalue, Long Pp_quantity, String Pp_DATE)
     {
-        productDataRepository.USP_ProductDataMange_I("I1","",Pp_id,Pp_name,Pvalue,Pp_quantity,Pp_DATE);
+        productDataRepository.USP_ProductDataMange_I("I1",0L,Pp_id,Pp_name,Pvalue,Pp_quantity,Pp_DATE);
     }
 
     @Transactional
     public void DELETE(String DATE) {
-        productDataRepository.USP_ProductDataMange_I("D1","","","","","",DATE);
+        productDataRepository.USP_ProductDataMange_I("D1",0L,0L,"",0L,0L,DATE);
     }
 }
