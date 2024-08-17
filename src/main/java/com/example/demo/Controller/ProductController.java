@@ -46,6 +46,11 @@ public class ProductController {
     @PostMapping("/insert")
     @Transactional(rollbackOn = {SQLException.class})
     public void insertAll(@RequestBody T_product  product){
-            productService.insertProduct(product.getP_id() ,product.getP_name().toString(),product.getValue(), product.getQuantity());
+            productService.insertProduct(product.getP_id() ,product.getP_name(),product.getValue(), product.getQuantity());
+    }
+    @PostMapping("/Delete")
+    @Transactional(rollbackOn = {SQLException.class})
+    public void Delete(@RequestBody T_product  product){
+        productService.DeleteProduct(product.getP_id() ,product.getP_name(),product.getValue(), product.getQuantity());
     }
 }

@@ -35,5 +35,10 @@ public class ProductService {
     {
         productRepository.USP_ProductMange_I("U1", P_id, P_name, Value, P_quantity);
     }
+    @Transactional
+    public void DeleteProduct(Long P_id,String P_name, Long Value, Long P_quantity)
+    {
+        productRepository.USP_ProductMange_I("D1", P_id, "", 0L, 0L);
+    }
 
 }
