@@ -31,14 +31,28 @@ public class ProductDataController {
                 .map(ProductDataDto::from)
                 .collect(Collectors.toList()));
     }
-    @GetMapping("/DATElist")
+    @PostMapping("/datelist")
     @Transactional(rollbackOn = {SQLException.class})
-    public ResponseEntity<List<ProductDataDto>> find(@RequestBody String date){
-        return ResponseEntity.ok(productDataService.find(date)
+    public ResponseEntity<List<ProductDataDto>> find(@RequestBody T_product_data date){
+        ResponseEntity<List<ProductDataDto>> result =
+         ResponseEntity.ok(productDataService.find(date.getDATE())
                 .stream()
                 .map(ProductDataDto::from)
                 .collect(Collectors.toList()));
+        return result;
     }
+
+    @PostMapping("/monthlist")
+    @Transactional(rollbackOn = {SQLException.class})
+    public ResponseEntity<List<ProductDataDto>> findmonth(@RequestBody T_product_data date){
+        ResponseEntity<List<ProductDataDto>> result =
+                ResponseEntity.ok(productDataService.findmonth(date.getDATE())
+                        .stream()
+                        .map(ProductDataDto::from)
+                        .collect(Collectors.toList()));
+        return result;
+    }
+
     @PostMapping("/insertAll")
     @Transactional(rollbackOn = {SQLException.class})
     public void insertAll(@RequestBody List<T_product_data>  dataAll){

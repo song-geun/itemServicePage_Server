@@ -28,6 +28,12 @@ public class ProductDataService {
         return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
     }
 
+    public List<T_product_data> findmonth(String DATE){
+        final List<T_product_data> productDataList;
+        productDataList = productDataRepository.USP_ProductDataMange("S3",0L,0L,"",0L,0L,DATE);
+        return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
+    }
+
     @Transactional
     public void Insert(String Pp,Long Pp_id, String Pp_name, Long Pvalue, Long Pp_quantity, String Pp_DATE)
     {
