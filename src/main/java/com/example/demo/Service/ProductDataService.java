@@ -34,6 +34,12 @@ public class ProductDataService {
         return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
     }
 
+    public List<T_product_data> findPeriod(String Date1, String Date2){
+        final List<T_product_data> productDataList;
+        productDataList = productDataRepository.USP_ProductDataMange_T("S1",0L,0L,"",0L,0L,Date1,Date2);
+        return productDataList.isEmpty() ? Collections.emptyList() : productDataList;
+    }
+
     @Transactional
     public void Insert(String Pp,Long Pp_id, String Pp_name, Long Pvalue, Long Pp_quantity, String Pp_DATE)
     {

@@ -52,11 +52,23 @@ public class ProductDataController {
                         .collect(Collectors.toList()));
         return result;
     }
+    @PostMapping("/periodlist")
+    @Transactional(rollbackOn = {SQLException.class})
+    public ResponseEntity<List<ProductDataDto>> findperiod(@RequestBody T_product_data date){
+        ResponseEntity<List<ProductDataDto>> result =
+                ResponseEntity.ok(productDataService.findPeriod(date.getP_name(),date.getDATE())
+                        .stream()
+                        .map(ProductDataDto::from)
+                        .collect(Collectors.toList()));
+        return result;
+    }
+
 
     @PostMapping("/insertAll")
     @Transactional(rollbackOn = {SQLException.class})
     public void insertAll(@RequestBody List<T_product_data>  dataAll){
-        for(T_product_data product : dataAll){
+        for(T_product_data product : dataAll)
+        {
             productDataService.Insert(product.getProd_data_id().toString(),product.getP_id(),product.getP_name(),
                     product.getValue(),product.getP_quantity(),product.getDATE());
         }
