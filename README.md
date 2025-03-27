@@ -35,11 +35,11 @@ BEGIN
         SELECT * FROM t_product_data WHERE LEFT(DATE,6) = LEFT(P_DATE,6);
     ELSEIF prstype = 'I1' THEN
         IF EXISTS(SELECT 1 FROM t_product_data) THEN
-            IF NOT EXISTS(SELECT 1 FROM t_product_data WHERE Pprod_data_id = prod_data_id) THEN
-                SET @M1 = (SELECT MAX(p_id) FROM t_product) + 1;
+            IF NOT EXISTS(SELECT 1 FROM t_product_data WHERE Pp_id = p_id AND P_DATE = DATE ) THEN
+                SET @M1 = (SELECT MAX(prod_data_id) FROM t_product_data) + 1;
                 INSERT INTO t_product_data(prod_data_id, p_id, p_name, value, p_quantity, date) values (@M1,Pp_id, Pp_name, P_value, P_quantity,P_DATE);
             ELSE
-                UPDATE t_product_data SET p_id = Pp_id, p_name = Pp_name, value = P_value, p_quantity = P_quantity, date = P_DATE WHERE prod_data_id = Pprod_data_id;
+                UPDATE t_product_data SET p_id = Pp_id, p_name = Pp_name, value = P_value, p_quantity = P_quantity, date = P_DATE WHERE Pp_id = p_id AND P_DATE = DATE;
             END IF;
         ELSE
             INSERT INTO t_product_data(prod_data_id, p_id, p_name, value, p_quantity, date) values (1,Pp_id, Pp_name, P_value, P_quantity,P_DATE);
@@ -58,13 +58,12 @@ create
                                                               IN Pp_DATE1 varchar(250), IN Pp_DATE2 varchar(250))
 BEGIN
     IF prstype = 'S1' THEN
-       SELECT p_id as prod_data_id, p_id,p_name, value, SUM(quantity) as quantity, p_id as date
+       SELECT p_id as prod_data_id, p_id,p_name, value, SUM(p_quantity) as quantity, p_id as date
        FROM t_product_data
        WHERE DATE >= Pp_DATE1 AND DATE <= Pp_DATE2
        GROUP BY p_id,p_name, value;
     END IF;
 END;
-​
 ```
 ​
 ## **3\. USP\_ProductManage**
@@ -81,7 +80,7 @@ BEGIN
         IF EXISTS(SELECT * FROM t_product) THEN
             IF NOT EXISTS(SELECT * FROM t_product WHERE p_id = Pp_id) THEN
                 SET @M1 = (SELECT MAX(p_id) FROM t_product) + 1;
-                INSERT INTO t_product(p_id, p_name, value, quantity) values (@M1,Pp_id, Pp_name, P_value);
+                INSERT INTO t_product(p_id, p_name, value, quantity) values (@M1,Pp_name, P_value, P_quantity);
             ELSE
                 UPDATE t_product SET p_id = Pp_id, p_name = Pp_name, value = P_value, quantity = P_quantity WHERE p_id = Pp_id;
             END IF;
