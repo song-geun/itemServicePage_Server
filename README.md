@@ -1,5 +1,5 @@
 
-> DB : mysql8.0.41
+> DB : mysql8.0.41 spring3.3.2
 
 # **소스코드**
 
